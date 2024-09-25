@@ -122,8 +122,16 @@ For development and debugging purposes, or to generate fully static binaries:
 
 ```sh
 git clone -b v1.1.1 https://github.com/AOMediaCodec/libavif.git
-cmake -S libavif -B libavif/build -DBUILD_SHARED_LIBS=OFF -DAVIF_CODEC_AOM=LOCAL -DAVIF_LIBYUV=LOCAL -DAVIF_LIBSHARPYUV=LOCAL -DAVIF_JPEG=LOCAL -DAVIF_ZLIBPNG=LOCAL -DAVIF_BUILD_APPS=ON -DCMAKE_C_FLAGS_RELEASE="-static" -DCMAKE_EXE_LINKER_FLAGS="-static"
-cmake --build libavif/build --parallel
+cd libavif/ext
+./aom.cmd
+./dav1d.cmd
+./libyuv.cmd
+./libsharpyuv.cmd
+./libjpeg.cmd
+./zlibpng.cmd
+cd ..
+cmake -S . -B build -DBUILD_SHARED_LIBS=OFF -DAVIF_CODEC_AOM=LOCAL -DAVIF_LIBYUV=LOCAL -DAVIF_LIBSHARPYUV=LOCAL -DAVIF_JPEG=LOCAL -DAVIF_ZLIBPNG=LOCAL -DAVIF_BUILD_APPS=ON -DCMAKE_C_FLAGS_RELEASE="-static" -DCMAKE_EXE_LINKER_FLAGS="-static" -DAVIF_CODEC_DAV1D=LOCAL -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
+cmake --build build --parallel
 ```
 
 ## Prebuilt Binaries (Windows)

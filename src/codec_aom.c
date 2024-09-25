@@ -68,6 +68,8 @@ struct avifCodecInternal
     // avifEncoderSetCodecSpecificOption(encoder, "tune", value) call.
     avifBool tuningSet;
     uint32_t currentLayer;
+#elif !defined(AVIF_CODEC_AOM_DECODE)
+    char dummy;
 #endif
 };
 

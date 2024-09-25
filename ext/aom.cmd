@@ -8,12 +8,13 @@
 : # If you're running this on Windows, be sure you've already run this (from your VC2019 install dir):
 : #     "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Auxiliary\Build\vcvars64.bat"
 
-git clone -b v3.10.0 --depth 1 https://aomedia.googlesource.com/aom
+git clone -b v3.10.0 --depth 1 https://github.com/jbeich/aom.git
 
 cd aom
 mkdir build.libavif
 cd build.libavif
 
-cmake -G Ninja -DBUILD_SHARED_LIBS=OFF -DCONFIG_PIC=1 -DCMAKE_BUILD_TYPE=Release -DENABLE_DOCS=0 -DENABLE_EXAMPLES=0 -DENABLE_TESTDATA=0 -DENABLE_TESTS=0 -DENABLE_TOOLS=0 ..
+: # need modify aom/CMakeLists.txt: cmake_minimum_required(VERSION 3.15)
+cmake -G Ninja -DBUILD_SHARED_LIBS=OFF -DCONFIG_PIC=1 -DCMAKE_BUILD_TYPE=Release -DENABLE_DOCS=0 -DENABLE_EXAMPLES=0 -DENABLE_TESTDATA=0 -DENABLE_TESTS=0 -DENABLE_TOOLS=0 -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded ..
 cd ../..
 ninja -C aom/build.libavif
