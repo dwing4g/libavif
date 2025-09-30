@@ -11,7 +11,7 @@
 : # installed:
 : #     set "CC=clang-cl" && set "CXX=clang-cl"
 
-git clone --single-branch https://chromium.googlesource.com/libyuv/libyuv
+git clone --single-branch https://github.com/lemenkov/libyuv.git
 
 cd libyuv
 : # When changing the commit below to a newer version of libyuv, it is best to make sure it is being used by chromium,
@@ -20,5 +20,5 @@ cd libyuv
 git checkout 4db2af62d
 cd ..
 
-cmake -G Ninja -S libyuv -B libyuv/build -DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+cmake -G Ninja -S libyuv -B libyuv/build -DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
 cmake --build libyuv/build --config Release --target yuv --parallel
